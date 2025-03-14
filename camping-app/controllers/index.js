@@ -1,2 +1,2 @@
 module.exports = { userController: require("./userController") };
-module.exports = { userController: require("./campingSiteController") };
+module.exports = { campingSiteController: require("./campingSiteController") };
