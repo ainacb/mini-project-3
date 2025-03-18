@@ -32,7 +32,8 @@ const getUserById = (req, res) => {
 
 // Create a new user
 const createUser = (req, res) => {
-  console.log("Received Body:", req.body); // ✅ Debugging log
+  console.log("Received Headers:", req.headers); // Debug headers
+  console.log("Received Body:", req.body); // Debugging log
 
   if (!req.body || Object.keys(req.body).length === 0) {
     return res
@@ -58,17 +59,9 @@ const createUser = (req, res) => {
     });
   }
 
-  Models.User.create({
-    first_name,
-    last_name,
-    username,
-    email,
-    profile_pic: profile_pic || null, // Default to null if not provided
-    is_verified: is_verified || false, // Default to false if not provided
-    social_links: social_links || null, // Default to null if not provided
-  })
-    .then((data) => {
-      res.status(201).json({ result: 201, data });
+  Models.User.create(req.body)
+    .then((newUser) => {
+      res.status(201).json({ result: 201, data: newUser });
     })
     .catch((err) => {
       console.log(err);
