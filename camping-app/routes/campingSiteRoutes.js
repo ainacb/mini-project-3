@@ -14,7 +14,7 @@ router.get("/:id", (req, res) => {
 
 // Adds a POST route to create a new camping site
 router.post("/create", (req, res) => {
-  campingSiteController.createCampingSite(req.body, res);
+  campingSiteController.createCampingSite(req, res);
 });
 
 // Adds a PUT route to update a camping site

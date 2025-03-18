@@ -2,7 +2,7 @@
 const Models = require("../models");
 
 // Finds all camping sites in DB, then sends array as response
-const getCampingSites = (res) => {
+const getCampingSites = (req, res) => {
   Models.CampingSite.findAll({})
     .then((data) => {
       res.send({ result: 200, data: data });
@@ -32,8 +32,25 @@ const getCampingSiteById = (req, res) => {
 };
 
 // Uses JSON from request body to create new camping site in DB
-const createCampingSite = (data, res) => {
-  Models.CampingSite.create(data)
+const createCampingSite = (req, res) => {
+  const { title, description, location, coordinates, average_rating } =
+    req.body;
+
+  if (!title || !description || !location || !coordinates) {
+    return res.status(400).json({
+      result: 400,
+      error:
+        "Missing required fields: title, description, location, or coordinates",
+    });
+  }
+
+  Models.CampingSite.create({
+    title,
+    description,
+    location,
+    coordinates,
+    average_rating: average_rating || null, // Default to null if not provided
+  })
     .then((data) => {
       res.send({ result: 200, data: data });
     })
