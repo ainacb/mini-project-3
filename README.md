@@ -31,7 +31,7 @@
 
 ## Entity-Relationship Diagram (ERD)
 
-![Camping App ERD](camping-app\src\ERD.png)
+![Camping App ERD](camping-app/src/ERD.png)
 
 ## API Documentation
 
