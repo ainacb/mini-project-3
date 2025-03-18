@@ -8,7 +8,7 @@ class Tag extends Model {}
 Tag.init(
   {
     tag_id: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING(36), // Changed from UUID to match MySQL VARCHAR(36)
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true,
